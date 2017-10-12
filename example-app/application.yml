@@ -1,0 +1,10 @@
+name: example-app
+description: ""
+version: 1.0
+
+services:
+  public: {}
+  private: {}
+  worker:
+    my-service:
+      location: ./my-service

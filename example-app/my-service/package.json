@@ -1,0 +1,35 @@
+{
+  "name": "my-service",
+  "dependencies": {
+    "exoservice": "0.26.4",
+    "pg": "7.3.0",
+    "pg-hstore": "2.3.2",
+    "sequelize": "4.13.8",
+    "sequelize-cli": "3.0.0"
+  },
+  "devDependencies": {
+    "async": "2.5.0",
+    "camelcase-keys": "4.1.0",
+    "chai": "4.1.2",
+    "cucumber": "3.0.4",
+    "eslint": "4.8.0",
+    "eslint-config-originate": "2.0.3",
+    "eslint-config-prettier": "2.6.0",
+    "eslint-plugin-filenames": "1.2.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-prettier": "2.3.1",
+    "exocom-mock": "0.26.4",
+    "js-yaml": "3.10.0",
+    "nitroglycerin": "1.1.2",
+    "observable-process": "^3.3.0",
+    "port-reservation": "0.3.2",
+    "prettier": "1.7.4",
+    "tree-kill": "1.2.0",
+    "wait": "0.1.0"
+  },
+  "private": true,
+  "scripts": {
+    "run": "sequelize db:migrate && node src/server.js",
+    "test": "eslint src features && cucumber-js --fail-fast"
+  }
+}

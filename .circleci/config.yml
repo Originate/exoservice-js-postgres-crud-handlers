@@ -1,0 +1,63 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.5.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}
+            - yarn-cache
+      - run: yarn install
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}
+          paths:
+            - node_modules
+      - save_cache:
+          key: yarn-cache
+          paths:
+            - node_modules
+      - setup_remote_docker
+      - run:
+          name: install exosphere
+          command: |
+            curl --output exo --location --fail https://github.com/Originate/exosphere/releases/download/v0.28.0/exo-linux-amd64
+            chmod +x exo
+            sudo mv exo /usr/local/bin/
+      - run: yarn test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+  deploy:
+    docker:
+      - image: circleci/node:8.5.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - run: npm publish
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/

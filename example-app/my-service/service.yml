@@ -1,0 +1,41 @@
+type: my-service
+description:
+author:
+
+startup:
+  online-text: online at port
+
+messages:
+  receives:
+    - create user
+    - delete user
+    - get user
+    - list user
+    - update user
+  sends:
+    - user created
+    - user deleted
+    - user list
+    - user details
+    - user updated
+
+development:
+  dependencies:
+    - name: postgres
+      version: 9.6.4
+      config:
+        dependency-environment:
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_USER: myuser
+          POSTGRES_DB: mydatabase
+        external-in-production: true
+        online-text: PostgreSQL init process complete
+        ports:
+          - '5432:5432'
+        service-environment:
+          DATABASE_PASSWORD: mypassword
+          DATABASE_USERNAME: myuser
+          DATABASE_NAME: mydatabase
+  scripts:
+    run: yarn run run
+    test: yarn run test
