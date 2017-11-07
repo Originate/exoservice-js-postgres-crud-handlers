@@ -29,7 +29,7 @@
   },
   "private": true,
   "scripts": {
-    "run": "sequelize db:migrate && node src/server.js",
+    "run": "node src/wait_for_postgres.js && sequelize db:migrate && node src/server.js",
     "test": "eslint src features && cucumber-js --fail-fast"
   }
 }

@@ -1,0 +1,28 @@
+version: "3"
+services:
+  my-service:
+    build:
+      context: /Users/charlesrudolph/projects/exoservice-sequelize-crud-handlers/example-app/my-service
+      dockerfile: Dockerfile.dev
+    command: yarn run test
+    container_name: my-service
+    links:
+    - postgres9.6.4:postgres
+    environment:
+      DATABASE_NAME: mydatabase
+      DATABASE_PASSWORD: mypassword
+      DATABASE_USERNAME: myuser
+      POSTGRES: postgres
+      ROLE: my-service
+    depends_on:
+    - postgres9.6.4
+  postgres9.6.4:
+    image: postgres:9.6.4
+    container_name: postgres9.6.4
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: myuser
+    restart: on-failure

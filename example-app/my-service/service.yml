@@ -2,9 +2,6 @@ type: my-service
 description:
 author:
 
-startup:
-  online-text: online at port
-
 messages:
   receives:
     - create user
@@ -28,8 +25,6 @@ development:
           POSTGRES_PASSWORD: mypassword
           POSTGRES_USER: myuser
           POSTGRES_DB: mydatabase
-        external-in-production: true
-        online-text: PostgreSQL init process complete
         ports:
           - '5432:5432'
         service-environment:

@@ -701,9 +701,6 @@ exocom-mock@0.26.4:
     wait "0.1.0"
     ws "3.1.0"
 
-"exoservice-sequelize-crud-handlers@file:../../":
-  version "1.0.0"
-
 exoservice@0.26.4:
   version "0.26.4"
   resolved "https://registry.yarnpkg.com/exoservice/-/exoservice-0.26.4.tgz#9ba5722441702ea9214f61955c07ba65a930dd1b"
